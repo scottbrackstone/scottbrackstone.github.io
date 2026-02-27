@@ -3,13 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scott Brackstone | Developer</title>
+    <title>Scott Brackstone | Dev Log</title>
+    <style>
+        /* Dark Space Grey Theme */
+        body {
+            background-color: #1a1a1b; /* Space Grey */
+            color: #ffffff; /* White text */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        /* The Feed Container */
+        .feed-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Individual "Tweet" Style */
+        .update-card {
+            background-color: #272729;
+            border: 1px solid #3e3e40;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .update-card:hover {
+            background-color: #2f2f31;
+        }
+
+        .date {
+            color: #818384;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 24px; }
+    </style>
 </head>
 <body>
-    <h1>Scott Brackstone</h1>
-    <p>IT student at QUT</p>
-    <hr>
-    <p>Currently under construction. Stay tuned!</p>
-    
+
+    <h1>Scott's Dev Log</h1>
+
+    <div class="feed-container">
+        <div class="update-card">
+            <div class="date">Feb 27, 2026</div>
+            <p>Officially launched <strong>scottbrackstone.dev</strong> today! Currently tackling Python OOP for my QUT Programming Fundamentals module. 🚀</p>
+        </div>
+
+        <div class="update-card">
+            <div class="date">Feb 26, 2026</div>
+            <p>Setup the M5 MacBook Pro environment and mastered the GitHub CLI. Feeling like a proper engineer now.</p>
+        </div>
+    </div>
+
 </body>
 </html>
