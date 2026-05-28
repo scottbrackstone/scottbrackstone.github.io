@@ -3,94 +3,888 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scott Brackstone's dev log, project archive, and learning notes for IT study, coding experiments, and personal builds.">
     <title>Scott Brackstone | Dev Log</title>
     <style>
-        /* Dark Space Grey Theme */
+        :root {
+            color-scheme: dark;
+            --bg: #111213;
+            --surface: #181a1d;
+            --surface-soft: #141619;
+            --line: #2d3238;
+            --line-soft: #23282e;
+            --text: #f4f0e8;
+            --muted: #b5afa5;
+            --quiet: #81878e;
+            --accent: #d7b46a;
+            --green: #9fbe83;
+            --cyan: #8ccfd3;
+            --max-width: 980px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 92px;
+        }
+
         body {
-            background-color: #1a1a1b; /* Space Grey */
-            color: #ffffff; /* White text */
+            margin: 0;
+            background:
+                linear-gradient(180deg, rgba(24, 26, 29, 0.78), rgba(17, 18, 19, 0) 360px),
+                var(--bg);
+            color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        li,
+        dd,
+        dt,
+        span,
+        strong {
+            overflow-wrap: break-word;
+        }
+
+        p,
+        ul,
+        dl,
+        dd {
             margin: 0;
         }
 
-        /* The Feed Container */
-        .feed-container {
-            width: 100%;
-            max-width: 500px;
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(17, 18, 19, 0.94);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(12px);
         }
 
-        /* Individual "Tweet" Style */
-        .update-card {
-            background-color: #272729;
-            border: 1px solid #3e3e40;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: background 0.2s;
+        .nav,
+        main,
+        .site-footer {
+            width: min(calc(100vw - 32px), var(--max-width));
+            margin-inline: auto;
         }
 
-        .update-card:hover {
-            background-color: #2f2f31;
+        .nav {
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .date {
-            color: #818384;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
+        .site-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
         }
 
-        h1 { font-size: 1.5rem; margin-bottom: 24px; }
+        .mark-icon {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--cyan);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.84rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .nav-links a {
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 10px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            background: var(--surface);
+            color: var(--text);
+            outline: none;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 42px;
+            align-items: start;
+            padding: 86px 0 70px;
+        }
+
+        .kicker {
+            margin-bottom: 14px;
+            color: var(--accent);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            line-height: 1.18;
+            letter-spacing: 0;
+        }
+
+        h1 {
+            max-width: 720px;
+            font-size: 3.45rem;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+        }
+
+        .hero-copy {
+            max-width: 680px;
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--muted);
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .focus-note {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background:
+                linear-gradient(180deg, rgba(215, 180, 106, 0.06), transparent 90px),
+                var(--surface);
+        }
+
+        .focus-note h2 {
+            font-size: 1rem;
+        }
+
+        .focus-note p {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+            min-width: 0;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            min-height: 28px;
+            padding: 4px 8px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.74rem;
+        }
+
+        .tag.accent {
+            color: var(--accent);
+        }
+
+        .tag.green {
+            color: var(--green);
+        }
+
+        .tag.cyan {
+            color: var(--cyan);
+        }
+
+        .section {
+            padding: 56px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(240px, 0.42fr);
+            gap: 28px;
+            align-items: end;
+            margin-bottom: 28px;
+        }
+
+        .section-header p {
+            color: var(--muted);
+        }
+
+        .project-list,
+        .log-list,
+        .learning-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .project,
+        .log-note,
+        .learning-list,
+        .about-panel {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 120px), var(--surface);
+        }
+
+        .project,
+        .log-note,
+        .about-panel {
+            min-width: 0;
+            padding: 20px;
+        }
+
+        .project header {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .status {
+            flex: 0 0 auto;
+            color: var(--quiet);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.76rem;
+        }
+
+        .project-notes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line-soft);
+        }
+
+        .project-notes dt,
+        .log-note strong {
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .project-notes dd,
+        .log-note p,
+        .about-panel p,
+        .learning-list li {
+            color: var(--muted);
+        }
+
+        .project-notes dd {
+            margin-top: 4px;
+            font-size: 0.95rem;
+        }
+
+        .log-note {
+            display: grid;
+            grid-template-columns: 130px minmax(0, 1fr);
+            gap: 18px;
+        }
+
+        .log-note time {
+            color: var(--quiet);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 0.78rem;
+        }
+
+        .log-note p {
+            margin-top: 8px;
+            font-size: 0.96rem;
+        }
+
+        .log-points {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
+            margin-top: 12px;
+        }
+
+        .log-points div {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-soft);
+        }
+
+        .log-points dt {
+            color: var(--text);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .log-points dd {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 0.94rem;
+        }
+
+        .learning-list {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            padding: 20px;
+        }
+
+        .learning-list li {
+            list-style: none;
+            padding-left: 14px;
+            border-left: 2px solid var(--line);
+        }
+
+        .learning-list strong {
+            display: block;
+            color: var(--text);
+        }
+
+        .about-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr);
+            gap: 28px;
+        }
+
+        .about-panel p + p {
+            margin-top: 14px;
+        }
+
+        .principles {
+            display: grid;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .principles li {
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .principles li:last-child {
+            border-bottom: 0;
+        }
+
+        .site-footer {
+            padding: 28px 0 46px;
+            border-top: 1px solid var(--line);
+            color: var(--quiet);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                min-height: auto;
+                padding: 14px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+
+            .hero,
+            .section-header,
+            .project-notes,
+            .log-points,
+            .about-panel,
+            .learning-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                gap: 26px;
+                padding: 54px 0 52px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.45rem;
+            }
+
+            .project header,
+            .log-note {
+                grid-template-columns: 1fr;
+            }
+
+            .project header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .nav,
+            main,
+            .site-footer {
+                width: min(calc(100vw - 24px), var(--max-width));
+            }
+
+            .site-mark {
+                align-items: flex-start;
+            }
+
+            .hero-links {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary navigation">
+            <a class="site-mark" href="#home" aria-label="Scott Brackstone home">
+                <span class="mark-icon">sb</span>
+                <span>scottbrackstone.dev</span>
+            </a>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#dev-log">Dev Log</a>
+                <a href="#learning">Now Learning</a>
+                <a href="#about">About</a>
+            </div>
+        </nav>
+    </header>
 
-    <h1>Scott's Dev Log</h1>
+    <main id="home">
+        <section class="hero" aria-labelledby="intro-title">
+            <div>
+                <p class="kicker">Digital workshop / dev log</p>
+                <h1 id="intro-title">Learning by building,<br>one project at a time.</h1>
+                <p class="hero-copy">
+                    I started this site as a place to document what I am learning and building as I work through IT,
+                    coding, and university projects. I am not trying to present myself as an expert. This is more of
+                    a dev log: a place to track progress, explain what I have built, and reflect on what each project
+                    taught me.
+                </p>
+                <div class="hero-links">
+                    <a class="button" href="#projects">Project archive</a>
+                    <a class="button secondary" href="#dev-log">Recent notes</a>
+                </div>
+            </div>
 
-    <div class="feed-container">
-        <div class="update-card">
-            <div class="date">10 May, 2026</div>
-            <p>
-                Big progress today. Designed the databases for Assignment 1 now comes the fun part. HTML, Bootstrap and CSS. We be building 🛠️
-            </p>
-        </div>
-        <div class="update-card">
-            <div class="date">08 May, 2026</div>
-            <p>
-                It has been a while since my last update. I was in study mode. Smashed the first semester of Uni. I received a high distiction for Programming fundamentals (Python). <br>
-                So happy with the result. We are now week two of Rapid Web Development and databases. It is a lot more theory but its slowly sinking in. <br>
-                Looking forward to getting to the web app build assignment but I am learning a lot about the design process right now.
-            </p>
-        </div>
-        <div class="update-card">
-            <div class="date">04 March, 2026</div>
-            <p>
-                Working on Assignment 2 tonight and OOP is just clicking for me. Its such a good feeling when you start to feel as though all the struggles over the past week are paying off. <br>
-                Actually another thing I haven't seen anyone speak about - I don't know if its just me but I really need to read what these UNI assignments are asking of me over and over before I truly get a grasp on what the task is.
-            </p>
-        </div>
-        <div class="update-card">
-            <div class="date">03 March, 2026</div>
-            <p>
-                Struggling to get my head around OOP. Well i have my head around it but keep missing little things like Instantiate my class before trying to call a method 🤣 <br>
-                After I submit this next assignment i want to take a week off and play around with html to update this page.
-            </p>
-        </div>
-        <div class="update-card">
-            <div class="date">27 Feb, 2026</div>
-            <p>
-                Officially launched <strong>scottbrackstone.dev</strong> today! Quick update to the website: Dark mode and twitter like text box updates. Time to get back to my studies currently learning Python OOP for my QUT Programming Fundamentals module. 🚀
-            </p>
-        </div>
+            <aside class="focus-note" aria-labelledby="current-focus-title">
+                <p class="kicker">Current focus</p>
+                <h2 id="current-focus-title">Rapid web development and databases</h2>
+                <p>
+                    Working through university assignments, database design, HTML, CSS, and the habits that make small
+                    projects easier to finish, explain, and improve.
+                </p>
+                <div class="tag-list" aria-label="Current learning tags">
+                    <span class="tag cyan">HTML</span>
+                    <span class="tag cyan">CSS</span>
+                    <span class="tag green">Python</span>
+                    <span class="tag accent">databases</span>
+                    <span class="tag">accessibility</span>
+                </div>
+            </aside>
+        </section>
 
-        <div class="update-card">
-            <div class="date">26 Feb, 2026</div>
-            <p>Setup the M5 MacBook Pro environment and mastered the GitHub CLI. Feeling like a proper engineer now.</p>
-        </div>
-    </div>
+        <section class="section" id="projects" aria-labelledby="projects-title">
+            <div class="section-header">
+                <div>
+                    <p class="kicker">Project archive</p>
+                    <h2 id="projects-title">Projects as learning case studies</h2>
+                </div>
+                <p>Each project is tracked by what I built, why I built it, what I learned, and what I would improve next.</p>
+            </div>
 
+            <div class="project-list">
+                <article class="project">
+                    <header>
+                        <div>
+                            <h3>University database design assignment</h3>
+                            <div class="tag-list">
+                                <span class="tag accent">uni project</span>
+                                <span class="tag">databases</span>
+                                <span class="tag">learning project</span>
+                            </div>
+                        </div>
+                        <span class="status">in progress</span>
+                    </header>
+                    <dl class="project-notes">
+                        <div>
+                            <dt>What I built</dt>
+                            <dd>A planned database structure for an assignment, ready to connect with the web build stage.</dd>
+                        </div>
+                        <div>
+                            <dt>Why I built it</dt>
+                            <dd>To understand the design process before jumping into the visible interface.</dd>
+                        </div>
+                        <div>
+                            <dt>What I learned</dt>
+                            <dd>Good web projects need clear data decisions before the HTML and CSS work starts.</dd>
+                        </div>
+                        <div>
+                            <dt>What I would improve next</dt>
+                            <dd>Document the schema decisions and connect them to the final user flows.</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="project">
+                    <header>
+                        <div>
+                            <h3>Programming fundamentals in Python</h3>
+                            <div class="tag-list">
+                                <span class="tag accent">uni project</span>
+                                <span class="tag green">Python</span>
+                                <span class="tag">OOP</span>
+                            </div>
+                        </div>
+                        <span class="status">completed</span>
+                    </header>
+                    <dl class="project-notes">
+                        <div>
+                            <dt>What I built</dt>
+                            <dd>Python assignments covering programming fundamentals and object-oriented programming.</dd>
+                        </div>
+                        <div>
+                            <dt>Why I built it</dt>
+                            <dd>To build a stronger base before moving further into web development and larger projects.</dd>
+                        </div>
+                        <div>
+                            <dt>What I learned</dt>
+                            <dd>Small details matter. Reading requirements carefully and testing assumptions both count.</dd>
+                        </div>
+                        <div>
+                            <dt>What I would improve next</dt>
+                            <dd>Turn the assignment learnings into small reusable examples I can refer back to.</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="project">
+                    <header>
+                        <div>
+                            <h3>This dev log website</h3>
+                            <div class="tag-list">
+                                <span class="tag cyan">web development</span>
+                                <span class="tag">GitHub Pages</span>
+                                <span class="tag">experiment</span>
+                            </div>
+                        </div>
+                        <span class="status">ongoing</span>
+                    </header>
+                    <dl class="project-notes">
+                        <div>
+                            <dt>What I built</dt>
+                            <dd>A simple static website for tracking learning notes, project work, and progress over time.</dd>
+                        </div>
+                        <div>
+                            <dt>Why I built it</dt>
+                            <dd>To have a low-pressure place to write about what I am building without turning it into a loud portfolio.</dd>
+                        </div>
+                        <div>
+                            <dt>What I learned</dt>
+                            <dd>Keeping the site simple makes it easier to maintain between study and assignment work.</dd>
+                        </div>
+                        <div>
+                            <dt>What I would improve next</dt>
+                            <dd>Add individual project pages once there is enough detail to justify them.</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="project">
+                    <header>
+                        <div>
+                            <h3>Small coding experiments</h3>
+                            <div class="tag-list">
+                                <span class="tag">experiment</span>
+                                <span class="tag cyan">web development</span>
+                                <span class="tag">learning project</span>
+                            </div>
+                        </div>
+                        <span class="status">collecting</span>
+                    </header>
+                    <dl class="project-notes">
+                        <div>
+                            <dt>What I built</dt>
+                            <dd>A growing place for small practice builds, layout tests, and code ideas that do not need full project pages yet.</dd>
+                        </div>
+                        <div>
+                            <dt>Why I built it</dt>
+                            <dd>To make room for learning work that is useful even when it is not polished or finished.</dd>
+                        </div>
+                        <div>
+                            <dt>What I learned</dt>
+                            <dd>Small experiments make it easier to test an idea before turning it into an assignment or personal build.</dd>
+                        </div>
+                        <div>
+                            <dt>What I would improve next</dt>
+                            <dd>Add short screenshots or notes once there are a few experiments worth keeping.</dd>
+                        </div>
+                    </dl>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="dev-log" aria-labelledby="dev-log-title">
+            <div class="section-header">
+                <div>
+                    <p class="kicker">Dev log / learning notes</p>
+                    <h2 id="dev-log-title">Short updates from the workbench</h2>
+                </div>
+                <p>Small notes, not long blog posts. The useful part is recording what was hard, what clicked, and what comes next.</p>
+            </div>
+
+            <div class="log-list">
+                <article class="log-note">
+                    <time datetime="2026-05-10">10 May 2026</time>
+                    <div>
+                        <h3>Database design moved into the web build stage</h3>
+                        <dl class="log-points">
+                            <div>
+                                <dt>What I learned</dt>
+                                <dd>Planning the database first gives the web build a clearer shape.</dd>
+                            </div>
+                            <div>
+                                <dt>What was difficult</dt>
+                                <dd>Keeping the data model in mind while thinking ahead to the interface.</dd>
+                            </div>
+                            <div>
+                                <dt>What clicked</dt>
+                                <dd>The design work is part of the build, not something separate from it.</dd>
+                            </div>
+                            <div>
+                                <dt>Next step</dt>
+                                <dd>Turn the assignment structure into usable interface sections.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="log-note">
+                    <time datetime="2026-05-08">08 May 2026</time>
+                    <div>
+                        <h3>First semester wrapped and the web units are underway</h3>
+                        <dl class="log-points">
+                            <div>
+                                <dt>What I learned</dt>
+                                <dd>Programming fundamentals gave me a stronger base for the next subjects.</dd>
+                            </div>
+                            <div>
+                                <dt>What was difficult</dt>
+                                <dd>Switching from coding tasks into more theory-heavy design and database work.</dd>
+                            </div>
+                            <div>
+                                <dt>What clicked</dt>
+                                <dd>The design process makes more sense when it connects to a real web app task.</dd>
+                            </div>
+                            <div>
+                                <dt>Next step</dt>
+                                <dd>Keep connecting the theory to small build decisions so it sticks.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="log-note">
+                    <time datetime="2026-03-04">04 Mar 2026</time>
+                    <div>
+                        <h3>Object-oriented programming started to feel more natural</h3>
+                        <dl class="log-points">
+                            <div>
+                                <dt>What I learned</dt>
+                                <dd>OOP takes repeated practice before it starts to feel natural.</dd>
+                            </div>
+                            <div>
+                                <dt>What was difficult</dt>
+                                <dd>Reading assignment requirements enough times to really understand the task.</dd>
+                            </div>
+                            <div>
+                                <dt>What clicked</dt>
+                                <dd>The concepts land better when they are tied to a working problem.</dd>
+                            </div>
+                            <div>
+                                <dt>Next step</dt>
+                                <dd>Keep breaking requirements down before writing code.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="log-note">
+                    <time datetime="2026-03-03">03 Mar 2026</time>
+                    <div>
+                        <h3>OOP details were still catching me out</h3>
+                        <dl class="log-points">
+                            <div>
+                                <dt>What I learned</dt>
+                                <dd>Small order-of-operations mistakes can block the whole flow.</dd>
+                            </div>
+                            <div>
+                                <dt>What was difficult</dt>
+                                <dd>Understanding the idea but still missing steps like creating an instance first.</dd>
+                            </div>
+                            <div>
+                                <dt>What clicked</dt>
+                                <dd>Debugging those small mistakes is part of building the mental model.</dd>
+                            </div>
+                            <div>
+                                <dt>Next step</dt>
+                                <dd>Experiment with HTML and keep improving this site.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="log-note">
+                    <time datetime="2026-02-27">27 Feb 2026</time>
+                    <div>
+                        <h3>scottbrackstone.dev went live</h3>
+                        <dl class="log-points">
+                            <div>
+                                <dt>What I learned</dt>
+                                <dd>GitHub Pages is enough for a simple learning journal.</dd>
+                            </div>
+                            <div>
+                                <dt>What was difficult</dt>
+                                <dd>Getting a personal site online while keeping the scope small.</dd>
+                            </div>
+                            <div>
+                                <dt>What clicked</dt>
+                                <dd>A plain static site can still be useful if it is easy to update.</dd>
+                            </div>
+                            <div>
+                                <dt>Next step</dt>
+                                <dd>Use the site to track Python OOP study and future web notes.</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="learning" aria-labelledby="learning-title">
+            <div class="section-header">
+                <div>
+                    <p class="kicker">Now learning</p>
+                    <h2 id="learning-title">Current learning areas</h2>
+                </div>
+                <p>This list should change as the work changes.</p>
+            </div>
+
+            <ul class="learning-list">
+                <li><strong>HTML and CSS</strong> Clearer layouts, responsive pages, and readable interfaces.</li>
+                <li><strong>JavaScript</strong> Adding behaviour carefully and understanding the basics first.</li>
+                <li><strong>Python</strong> Programming fundamentals, OOP, and problem solving.</li>
+                <li><strong>Databases</strong> Data design, relationships, and assignment planning.</li>
+                <li><strong>Accessibility</strong> Pages that are easier to read, navigate, and understand.</li>
+                <li><strong>University projects</strong> Turning coursework into clearer project notes and reflections.</li>
+                <li><strong>Project notes</strong> Recording what changed, what was confusing, and what to improve next.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="section-header">
+                <div>
+                    <p class="kicker">About this site</p>
+                    <h2 id="about-title">A quiet place for progress notes</h2>
+                </div>
+                <p>The focus is on the work and the learning process, not on making a big personal brand out of it.</p>
+            </div>
+
+            <div class="about-panel">
+                <div>
+                    <h3>Why this exists</h3>
+                    <p>
+                        I am studying IT and using this site to document projects, coursework, experiments, and the small lessons
+                        that come from building things. Some notes will be rough because they are written while I am still learning.
+                    </p>
+                    <p>
+                        The aim is to keep a useful record: what I tried, what worked, what did not, and where the next improvement
+                        might be. If a project becomes more complete, it can earn its own page later.
+                    </p>
+                </div>
+                <ul class="principles" aria-label="Site principles">
+                    <li>Keep the tone honest and practical.</li>
+                    <li>Show the learning process, not just finished output.</li>
+                    <li>Prefer useful notes over polished hype.</li>
+                    <li>Keep the site easy to maintain between assignments.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Built as a static GitHub Pages site. Learning notes, project archive, and small experiments by Scott Brackstone.</p>
+    </footer>
 </body>
 </html>
