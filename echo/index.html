@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Echo</title>
+<meta name="description" content="Echo is a private, single-user personal assistant.">
+<style>
+  :root { --bg: #fbfbfa; --ink: #1d1d1f; --muted: #5f6368; --rule: #e3e3e0; --link: #1a5fd0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141416; --ink: #ececec; --muted: #a3a3a8; --rule: #2c2c30; --link: #8ab4f8; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 56px 16px 72px; }
+  h1 { font-size: 34px; margin: 0 0 8px; letter-spacing: -0.02em; }
+  p { margin: 0 0 16px; }
+  .lead { color: var(--muted); font-size: 19px; margin-bottom: 32px; }
+  a { color: var(--link); }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Echo</h1>
+  <p class="lead">A private personal assistant, built and used by one person.</p>
+  <p>Echo runs on its owner's own computer. It helps with everyday planning: a daily
+  briefing, reminders, goals, and answering questions about the owner's own calendar
+  and email when the owner asks.</p>
+  <p>Echo is not a public service. There are no other users, no sign-ups and no
+  accounts to create. Its connection to Google is read-only: it can look at the
+  owner's Gmail and Google Calendar, but it cannot send, delete or change anything.</p>
+  <p>Read the <a href="privacy.html">privacy policy</a> to see how Google data is handled.</p>
+  <footer>Echo · maintained by <a href="https://github.com/scottbrackstone">scottbrackstone</a></footer>
+</main>
+</body>
+</html>

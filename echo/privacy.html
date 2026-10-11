@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Echo Privacy Policy</title>
+<meta name="description" content="How Echo, a private single-user assistant, handles Google user data.">
+<style>
+  :root { --bg: #fbfbfa; --ink: #1d1d1f; --muted: #5f6368; --rule: #e3e3e0; --link: #1a5fd0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141416; --ink: #ececec; --muted: #a3a3a8; --rule: #2c2c30; --link: #8ab4f8; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 56px 16px 72px; }
+  h1 { font-size: 32px; margin: 0 0 4px; letter-spacing: -0.02em; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  p, li { margin: 0 0 12px; }
+  ul { padding-left: 22px; margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  a { color: var(--link); }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Echo Privacy Policy</h1>
+  <p class="muted">Last updated 11 October 2026</p>
+
+  <h2>Who this covers</h2>
+  <p>Echo is a personal assistant that one person built for their own use. It runs on
+  that person's own computer. The only Google account Echo connects to is its owner's.
+  Echo is not offered to anyone else.</p>
+
+  <h2>What Google data Echo accesses</h2>
+  <ul>
+    <li><strong>Gmail, read-only</strong> (<code>gmail.readonly</code>): the sender,
+    subject, date and short preview of messages, and a message's content only when
+    the owner asks for that message.</li>
+    <li><strong>Google Calendar, read-only</strong> (<code>calendar.readonly</code>):
+    event titles, times and places.</li>
+  </ul>
+  <p>Echo cannot send, delete, label or change email, and cannot create or change
+  calendar events.</p>
+
+  <h2>How it is used</h2>
+  <ul>
+    <li>Only to answer the owner's own requests (for example, "find my flight booking")
+    and, if the owner switches them on, for the owner's daily briefing and reminders.</li>
+    <li>To produce an answer, the relevant email or calendar details are sent to the AI
+    model provider the owner has chosen (currently Anthropic's Claude API). They are
+    processed under that provider's commercial API terms. Echo does not use this data
+    to train AI models.</li>
+    <li>Google data is never sold, shared with other people, used for advertising, or
+    read by anyone other than the owner.</li>
+  </ul>
+
+  <h2>Storage and security</h2>
+  <p>Echo stores its data on its owner's computer. Google access tokens are kept
+  encrypted in a local password vault. Echo's chat history can contain answers that
+  were drawn from email or calendar data. The owner can delete chats at any time.</p>
+
+  <h2>Limited Use</h2>
+  <p>Echo's use and transfer of information received from Google APIs adheres to the
+  <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API
+  Services User Data Policy</a>, including the Limited Use requirements.</p>
+
+  <h2>Removing access</h2>
+  <p>Access can be removed at any time by disconnecting Gmail or Calendar in Echo's
+  settings, or at <a href="https://myaccount.google.com/permissions">Google Account ›
+  Third-party connections</a>. Disconnecting deletes Echo's stored tokens.</p>
+
+  <h2>Contact</h2>
+  <p>Questions: through <a href="https://github.com/scottbrackstone">github.com/scottbrackstone</a>.</p>
+
+  <footer><a href="./">Echo</a></footer>
+</main>
+</body>
+</html>
